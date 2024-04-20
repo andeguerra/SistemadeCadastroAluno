@@ -30,6 +30,7 @@
         {
             this.lblNome = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.txtTitulo = new System.Windows.Forms.Label();
             this.labelEndereco = new System.Windows.Forms.Label();
             this.lblNascimento = new System.Windows.Forms.Label();
@@ -40,11 +41,18 @@
             this.mtxtCPF = new System.Windows.Forms.MaskedTextBox();
             this.mtxtRG = new System.Windows.Forms.MaskedTextBox();
             this.btnCadastrar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvTabela = new System.Windows.Forms.DataGridView();
             this.dtpData = new System.Windows.Forms.DateTimePicker();
             this.btnExibir = new System.Windows.Forms.Button();
+            this.btnAtualizar = new System.Windows.Forms.Button();
+            this.btnExcluir = new System.Windows.Forms.Button();
+            this.id_aluno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cpf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabela)).BeginInit();
@@ -71,6 +79,19 @@
             this.panel1.Size = new System.Drawing.Size(600, 58);
             this.panel1.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Transparent;
+            this.button1.Location = new System.Drawing.Point(495, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 32);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Fechar";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // txtTitulo
             // 
             this.txtTitulo.AutoSize = true;
@@ -95,7 +116,7 @@
             // lblNascimento
             // 
             this.lblNascimento.AutoSize = true;
-            this.lblNascimento.Location = new System.Drawing.Point(357, 77);
+            this.lblNascimento.Location = new System.Drawing.Point(359, 77);
             this.lblNascimento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNascimento.Name = "lblNascimento";
             this.lblNascimento.Size = new System.Drawing.Size(130, 17);
@@ -161,26 +182,13 @@
             this.btnCadastrar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnCadastrar.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCadastrar.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnCadastrar.Location = new System.Drawing.Point(453, 156);
+            this.btnCadastrar.Location = new System.Drawing.Point(453, 150);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(134, 39);
             this.btnCadastrar.TabIndex = 11;
             this.btnCadastrar.Text = "Cadastrar";
             this.btnCadastrar.UseVisualStyleBackColor = false;
             this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Window;
-            this.button1.Location = new System.Drawing.Point(528, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 39);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -193,15 +201,26 @@
             // 
             // dgvTabela
             // 
+            this.dgvTabela.AllowUserToAddRows = false;
+            this.dgvTabela.AllowUserToResizeColumns = false;
             this.dgvTabela.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTabela.Location = new System.Drawing.Point(19, 18);
+            this.dgvTabela.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id_aluno,
+            this.nome,
+            this.endereco,
+            this.data,
+            this.cpf,
+            this.rg});
+            this.dgvTabela.Location = new System.Drawing.Point(3, 3);
             this.dgvTabela.Name = "dgvTabela";
-            this.dgvTabela.Size = new System.Drawing.Size(538, 186);
+            this.dgvTabela.RowHeadersVisible = false;
+            this.dgvTabela.Size = new System.Drawing.Size(569, 217);
             this.dgvTabela.TabIndex = 0;
+            this.dgvTabela.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTabela_CellClick);
             // 
             // dtpData
             // 
-            this.dtpData.Location = new System.Drawing.Point(495, 77);
+            this.dtpData.Location = new System.Drawing.Point(496, 74);
             this.dtpData.Name = "dtpData";
             this.dtpData.Size = new System.Drawing.Size(92, 25);
             this.dtpData.TabIndex = 13;
@@ -220,11 +239,77 @@
             this.btnExibir.UseVisualStyleBackColor = false;
             this.btnExibir.Click += new System.EventHandler(this.btnExibir_Click);
             // 
+            // btnAtualizar
+            // 
+            this.btnAtualizar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAtualizar.Enabled = false;
+            this.btnAtualizar.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtualizar.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnAtualizar.Location = new System.Drawing.Point(12, 446);
+            this.btnAtualizar.Name = "btnAtualizar";
+            this.btnAtualizar.Size = new System.Drawing.Size(134, 39);
+            this.btnAtualizar.TabIndex = 15;
+            this.btnAtualizar.Text = "Atualizar";
+            this.btnAtualizar.UseVisualStyleBackColor = false;
+            this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
+            // 
+            // btnExcluir
+            // 
+            this.btnExcluir.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnExcluir.Enabled = false;
+            this.btnExcluir.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluir.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnExcluir.Location = new System.Drawing.Point(152, 446);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(134, 39);
+            this.btnExcluir.TabIndex = 16;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.UseVisualStyleBackColor = false;
+            // 
+            // id_aluno
+            // 
+            this.id_aluno.DataPropertyName = "id";
+            this.id_aluno.HeaderText = "ID";
+            this.id_aluno.Name = "id_aluno";
+            // 
+            // nome
+            // 
+            this.nome.DataPropertyName = "nome";
+            this.nome.FillWeight = 200F;
+            this.nome.HeaderText = "Nome";
+            this.nome.Name = "nome";
+            // 
+            // endereco
+            // 
+            this.endereco.DataPropertyName = "endereco";
+            this.endereco.HeaderText = "Endereço";
+            this.endereco.Name = "endereco";
+            // 
+            // data
+            // 
+            this.data.DataPropertyName = "data";
+            this.data.HeaderText = "Data de Nascimento";
+            this.data.Name = "data";
+            // 
+            // cpf
+            // 
+            this.cpf.DataPropertyName = "cpf";
+            this.cpf.HeaderText = "CPF";
+            this.cpf.Name = "cpf";
+            // 
+            // rg
+            // 
+            this.rg.DataPropertyName = "rg";
+            this.rg.HeaderText = "RG";
+            this.rg.Name = "rg";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 497);
+            this.Controls.Add(this.btnExcluir);
+            this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.btnExibir);
             this.Controls.Add(this.dtpData);
             this.Controls.Add(this.panel2);
@@ -272,6 +357,14 @@
         private System.Windows.Forms.DataGridView dgvTabela;
         private System.Windows.Forms.DateTimePicker dtpData;
         private System.Windows.Forms.Button btnExibir;
+        private System.Windows.Forms.Button btnAtualizar;
+        private System.Windows.Forms.Button btnExcluir;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_aluno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cpf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rg;
     }
 }
 
